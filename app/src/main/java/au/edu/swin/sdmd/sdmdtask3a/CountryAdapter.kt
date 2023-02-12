@@ -1,10 +1,8 @@
 package au.edu.swin.sdmd.sdmdtask3a
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.os.Debug
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,9 +42,11 @@ class CountryAdapter(private val data:List<Country>) : RecyclerView.Adapter<Coun
             holder.bind(item, 0)
         }
         holder.backgroundView.setOnClickListener {
-            Toast.makeText(holder.backgroundView.context, "${item.countryName} has won ${item.getTotal()} medals" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.backgroundView.context,
+                "${item.countryName} has won ${item.getTotal()} medals" , Toast.LENGTH_SHORT).show()
 
-            val pref:SharedPreferences = holder.backgroundView.context.getSharedPreferences("MyPref" , Context.MODE_PRIVATE)
+            val pref:SharedPreferences = holder.backgroundView.context.getSharedPreferences("MyPref",
+                Context.MODE_PRIVATE)
             val editor:SharedPreferences.Editor =  pref.edit()
             editor.putString("CName",item.countryName)
             editor.putInt("MedalCount", item.getTotal())
@@ -86,13 +86,6 @@ class CountryAdapter(private val data:List<Country>) : RecyclerView.Adapter<Coun
         list.add(first)
         list.add(second)
         list.add(third)
-
-        Log.i("first", list[0].countryName)
-        Log.i("score", list[0].getTotal().toString())
-        Log.i("second", list[1].countryName)
-        Log.i("score", list[1].getTotal().toString())
-        Log.i("third", list[2].countryName)
-        Log.i("score", list[2].getTotal().toString())
 
         return list
     }
